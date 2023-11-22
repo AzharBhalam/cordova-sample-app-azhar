@@ -1,0 +1,43 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {
+      "config.xml": {
+        "parents": {
+          "/*": [
+            {
+              "xml": "<feature name=\"Checkout\"><param name=\"ios-package\" value=\"Main\" /></feature>",
+              "count": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "installed_plugins": {
+    "cordova-plugin-cocoapod-support": {
+      "PACKAGE_NAME": "com.example.hello"
+    },
+    "com.razorpay.cordova": {
+      "PACKAGE_NAME": "com.example.hello"
+    }
+  },
+  "dependent_plugins": {},
+  "modules": [
+    {
+      "id": "com.razorpay.cordova.RazorpayCheckout",
+      "file": "plugins/com.razorpay.cordova/www/RazorpayCheckout.js",
+      "pluginId": "com.razorpay.cordova",
+      "clobbers": [
+        "RazorpayCheckout"
+      ]
+    }
+  ],
+  "plugin_metadata": {
+    "cordova-plugin-cocoapod-support": "1.6.2",
+    "com.razorpay.cordova": "0.16.1"
+  }
+}
