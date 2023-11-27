@@ -295,12 +295,12 @@ dependencies {
     }
 
     // Add local AAR dependencies
-    implementation files('/Users/azhar.ali/Documents/Cordova/sample-app/cordova-sample-app-azhar/platforms/android/app/src/main/libs/checkout-uat-231023-1429.aar',
-            '/Users/azhar.ali/Documents/Cordova/sample-app/cordova-sample-app-azhar/platforms/android/app/src/main/libs/olive-0408231650.aar',
-            '/Users/azhar.ali/Documents/Cordova/sample-app/cordova-sample-app-azhar/platforms/android/app/src/main/libs/razorpay-turbo-wrapper-uat-231023-1429.aar',
-            '/Users/azhar.ali/Documents/Cordova/sample-app/cordova-sample-app-azhar/platforms/android/app/src/main/libs/SecureComponent-release-signed_UAT_14072022_e64f899a.aar',
-            '/Users/azhar.ali/Documents/Cordova/sample-app/cordova-sample-app-azhar/platforms/android/app/src/main/libs/upi-headless-sdk-debug-2210231021.aar',
-            '/Users/azhar.ali/Documents/Cordova/sample-app/cordova-sample-app-azhar/platforms/android/app/src/main/libs/upi-turbo-view-debug-2210231021.aar'
+    implementation files('/Users/azhar.ali/Documents/libs/checkout-uat-091123-1027.aar',
+            '/Users/azhar.ali/Documents/libs/olive-0408231650.aar',
+            '/Users/azhar.ali/Documents/libs/razorpay-turbo-wrapper-uat-241123-1859.aar',
+            '/Users/azhar.ali/Documents/libs/SecureComponent-release-signed_UAT_14072022_e64f899a.aar',
+            '/Users/azhar.ali/Documents/libs/upi-headless-sdk-debug-2210231021.aar',
+            '/Users/azhar.ali/Documents/libs/upi-turbo-view-debug-2210231021.aar'
     )
 
     // Adding additional Dependencies needed for Razorpay Checkout with Turbo UPI module
@@ -316,6 +316,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
     // SUB-PROJECT DEPENDENCIES END

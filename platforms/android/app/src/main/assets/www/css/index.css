@@ -88,7 +88,23 @@ h1 {
     display:none;
 }
 
-#btnPay {
+#rzp-open {
+    background-color: #0074d9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#rzp-link-new-acc {
+    background-color: #0074d9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#rzp-manage-upi {
     background-color: #0074d9;
     color: #fff;
     padding: 10px 20px;

@@ -23,6 +23,28 @@ var RazorpayCheckout = module.exports = {
       );
     },
 
+    linkNewUPIAccount: function (options, successCallback, errorCallback) {
+          if (successCallback) {
+            RazorpayCheckout.callbacks['link.success'] = function(response) {
+              successCallback(response.razorpay_payment_id);
+            }
+          }
+
+          if (errorCallback) {
+            RazorpayCheckout.callbacks['link.fail'] = errorCallback;
+          }
+
+          cordova.exec(
+            RazorpayCheckout.pluginCallback,
+            RazorpayCheckout.pluginCallback,
+            'Checkout',
+            'linkNewUPIAccount',
+            [
+              JSON.stringify(options)
+            ]
+          );
+        },
+
     pluginCallback: function(response){
       if('razorpay_payment_id' in response){
         RazorpayCheckout.callbacks['payment.success'](response);

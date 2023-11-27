@@ -1,18 +1,24 @@
 package com.razorpay.cordova;
 
-import com.razorpay.CheckoutActivity;
 import com.razorpay.Checkout;
+import com.razorpay.GenericPluginCallback;
 import com.razorpay.PaymentResultWithDataListener;
 import com.razorpay.ExternalWalletListener;
 import com.razorpay.PaymentData;
+
 import org.json.JSONObject;
 import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 import android.os.Bundle;
 import android.content.Intent;
-import android.app.Activity;
+
+import androidx.annotation.NonNull;
 
 
 public class Main extends CordovaPlugin implements PaymentResultWithDataListener, ExternalWalletListener {
@@ -21,6 +27,7 @@ public class Main extends CordovaPlugin implements PaymentResultWithDataListener
   public static final String MAP_KEY_CONTACT = "contact";
   public static final String MAP_KEY_EMAIL = "email";
   public static final String MAP_KEY_EXTERNAL_WALLET_NAME = "external_wallet_name";
+  public static final String MAP_METHOD_UNSUPPORTED = "method_not_supported";
 
   private String userAction;
   public CallbackContext cc;
@@ -31,26 +38,83 @@ public class Main extends CordovaPlugin implements PaymentResultWithDataListener
   public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
     this.cc = callbackContext;
     this.userAction = action;
+      Log.d("DONNSB", "execute called");
     checkout = new Checkout().upiTurbo(this.cordova.getActivity());
     //checkout.upiTurbo.destroy();
     try{
-     /* Intent intent = new Intent(this.cordova.getActivity(), CheckoutActivity.class);
-      intent.putExtra("OPTIONS", data.getString(0));
-      intent.putExtra("FRAMEWORK", "cordova");
-      this.cordova.startActivityForResult((CordovaPlugin)this, intent, Checkout.RZP_REQUEST_CODE);*/
+        switch (action){
+            case "open":
+                Log.d("DONNSB", "case open");
+                /*JSONObject payload = new JSONObject(data.getString(0));
+                if (payload.has("key")) {
+                    checkout.setKeyID(payload.getString("key"));
+                    payload.remove("key");
+                }*/
+                //checkout.open(this.cordova.getActivity(), payload);
+                //checkout.setKeyID("rzp_test_0wFRWIZnH65uny");
+                checkout.upiTurbo.linkNewUpiAccount("9928815231", "#aabb11", new GenericPluginCallback() {
+                    @Override
+                    public void onSuccess(@NonNull Object data) {
+                        Log.d("DONNSB", "linkNewUpiAccount success");
+                    }
 
-      JSONObject payload = new JSONObject(data.getString(0));
-        if (payload.has("key")) {
-            checkout.setKeyID(payload.getString("key"));
-            payload.remove("key");
+                    @Override
+                    public void onError(@NonNull JSONObject jsonObject) {
+                        Log.d("DONNSB", "linkNewUpiAccount failure");
+                    }
+                });
+                break;
+            case "linkNewUPIAccount":
+                Log.d("DONNSB", "case link new upi account");
+                checkout.upiTurbo.linkNewUpiAccount("9928815231", "#aabb11", new GenericPluginCallback() {
+                    @Override
+                    public void onSuccess(@NonNull Object data) {
+                       /*if(!((List<?>)data).isEmpty()){
+                           cc.success((JSONObject) data);
+                           Gson gson = new Gson();
+                       }else {
+
+                       }*/
+                        Log.d("DONNSB", "linkNewUpiAccount success");
+                    }
+
+                    @Override
+                    public void onError(@NonNull JSONObject jsonObject) {
+                        Log.d("DONNSB", "linkNewUpiAccount failure");
+                    }
+                });
+                break;
+            case "manageUPIAccounts":
+                Log.d("DONNSB", "case manage upi accounts");
+                checkout.upiTurbo.manageUpiAccounts("9928815231", "#aabb11", new GenericPluginCallback() {
+                    @Override
+                    public void onSuccess(@NonNull Object data) {
+                        Log.d("DONNSB", "manageUPIAccounts success");
+                    }
+
+                    @Override
+                    public void onError(@NonNull JSONObject jsonObject) {
+                        Log.d("DONNSB", "manageUPIAccounts failure");
+                    }
+                });
+                break;
+            default:
+                JSONObject response = new JSONObject();
+                response.put(MAP_METHOD_UNSUPPORTED, action);
+                cc.error(response);
         }
-        checkout.open(this.cordova.getActivity(), payload);
 
     } catch (Exception e){
+        e.printStackTrace();
+        Log.d("DONNSB", "exception is : try catch occur");
       Toast.makeText(this.cordova.getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
     }
     return true;
   }
+
+ /* private JSONObject getJsonFromModel(Object data, Object model){
+
+  }*/
 
   public Bundle onSaveInstanceState() {
     Bundle bundle = new Bundle();

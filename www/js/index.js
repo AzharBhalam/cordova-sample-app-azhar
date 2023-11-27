@@ -65,7 +65,7 @@ var rzpOptions = {
         email: "azhar.ali@razorpay.com"
     },
     notes: {
-        address: "Hello World"
+        address: "Cordova plugin for UPI turbo"
     },
     theme: {
         color: "#F37254"
@@ -73,14 +73,24 @@ var rzpOptions = {
     experiments:{
     upi_turbo: true
     },
+    send_sms_hash: true,
+    retry: {
+         enabled: false,
+         max_count: 4
+    },
+    disable_redesign_v15: false,
     ep: "https://api-web-turbo-upi.ext.dev.razorpay.in/test/checkout.html"
 };
 
 var successCallback = function(payment_id) {
+  console.log("payment_id : "+ payment_id)
+  //handle success
   alert('payment_id: ' + payment_id)
 };
 
 var cancelCallback = function(error) {
+ console.log("error.description : "+ error.description)
+ console.log("error.code : "+ error.code)
   alert(error.description + ' (Error '+error.code+')')
 };
 
@@ -111,17 +121,22 @@ var app = {
         // Add a click event listener to the button
         btnPay.addEventListener("click", function () {
             // Display an alert when the button is clicked
-            RazorpayCheckout.open
             alert("Awesome, button is Clicked! Now next step is to integrate the latest checkout SDK to explore the functionality");
         });
         app.addRZPEventListener();
     },
 
     addRZPEventListener: function() {
-        document.getElementById('rzp-button').addEventListener('click', function(event) {
+        document.getElementById('rzp-open').addEventListener('click', function(event) {
             RazorpayCheckout.open(rzpOptions, successCallback, cancelCallback);
             event.preventDefault();
-        })
+        });
+
+        document.getElementById('rzp-link-new-acc').addEventListener('click', function(event) {
+                    alert("coool");
+                    RazorpayCheckout.linkNewUPIAccount(rzpOptions, successCallback, cancelCallback);
+                    event.preventDefault();
+                })
     }
 };
 
