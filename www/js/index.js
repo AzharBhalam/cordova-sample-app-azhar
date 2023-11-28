@@ -94,6 +94,15 @@ var cancelCallback = function(error) {
   alert(error.description + ' (Error '+error.code+')')
 };
 
+var linkSuccessCallback = function(upiAccounts) {
+  console.log("payment_id : "+ upiAccounts)
+};
+
+var linkCancelCallback = function(error) {
+ console.log("error.description : "+ error.description)
+ console.log("error.code : "+ error.code)
+};
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -121,7 +130,7 @@ var app = {
         // Add a click event listener to the button
         btnPay.addEventListener("click", function () {
             // Display an alert when the button is clicked
-            alert("Awesome, button is Clicked! Now next step is to integrate the latest checkout SDK to explore the functionality");
+            alert("Button is Clicked! Now next step is to integrate the latest checkout SDK to explore the functionality");
         });
         app.addRZPEventListener();
     },
@@ -133,9 +142,9 @@ var app = {
         });
 
         document.getElementById('rzp-link-new-acc').addEventListener('click', function(event) {
-                    alert("coool");
-                    RazorpayCheckout.linkNewUPIAccount(rzpOptions, successCallback, cancelCallback);
-                    event.preventDefault();
+        event.preventDefault();
+        console.log(RazorpayCheckout)
+                    RazorpayCheckout.linkNewUPIAccount("9928815231","#aabbcc", linkSuccessCallback, linkCancelCallback);
                 })
     }
 };

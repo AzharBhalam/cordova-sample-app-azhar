@@ -277,6 +277,10 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 /*
@@ -299,8 +303,8 @@ dependencies {
             '/Users/azhar.ali/Documents/libs/olive-0408231650.aar',
             '/Users/azhar.ali/Documents/libs/razorpay-turbo-wrapper-uat-241123-1859.aar',
             '/Users/azhar.ali/Documents/libs/SecureComponent-release-signed_UAT_14072022_e64f899a.aar',
-            '/Users/azhar.ali/Documents/libs/upi-headless-sdk-debug-2210231021.aar',
-            '/Users/azhar.ali/Documents/libs/upi-turbo-view-debug-2210231021.aar'
+            '/Users/azhar.ali/Documents/libs/upi-psp-sdk-debug.aar',
+            '/Users/azhar.ali/Documents/libs/upi-turbo-view-debug.aar'
     )
 
     // Adding additional Dependencies needed for Razorpay Checkout with Turbo UPI module
@@ -316,6 +320,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.databinding:databinding-runtime:7.0.0'
 
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))

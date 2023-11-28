@@ -17,11 +17,11 @@
       "android"
     ],
     "plugins": {
-      "com.razorpay.cordova": {}
+      "com.razorpay.cordova": "/Users/azhar.ali/Documents/Cordova/sample-app/cordova-sample-app-azhar/plugins/com.razorpay.cordova"
     }
   },
   "dependencies": {
-    "com.razorpay.cordova": "github:razorpay/razorpay-cordova"
+    "com.razorpay.cordova": "/Users/azhar.ali/Documents/Cordova/sample-app/cordova-sample-app-azhar/plugins/com.razorpay.cordova"
   },
   "devDependencies": {
     "cordova-android": "^12.0.1",

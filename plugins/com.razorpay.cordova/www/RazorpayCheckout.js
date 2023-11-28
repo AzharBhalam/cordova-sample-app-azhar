@@ -1,7 +1,8 @@
 /*global cordova, module*/
-
+console.log('RazorpayCheckout.js loaded');
 var RazorpayCheckout = module.exports = {
     open: function (options, successCallback, errorCallback) {
+    console.log('RazorpayCheckout.js open loaded');
       if (successCallback) {
         RazorpayCheckout.callbacks['payment.success'] = function(response) {
           successCallback(response.razorpay_payment_id);
@@ -23,15 +24,16 @@ var RazorpayCheckout = module.exports = {
       );
     },
 
-    linkNewUPIAccount: function (options, successCallback, errorCallback) {
-          if (successCallback) {
+    linkNewUPIAccount: function (mobileNo, color, linkSuccessCallback, linkCancelCallback) {
+
+          if (linkSuccessCallback) {
             RazorpayCheckout.callbacks['link.success'] = function(response) {
-              successCallback(response.razorpay_payment_id);
+              linkSuccessCallback("upi-Accounts");
             }
           }
 
-          if (errorCallback) {
-            RazorpayCheckout.callbacks['link.fail'] = errorCallback;
+          if (linkCancelCallback) {
+            RazorpayCheckout.callbacks['link.fail'] = linkCancelCallback;
           }
 
           cordova.exec(
@@ -40,7 +42,7 @@ var RazorpayCheckout = module.exports = {
             'Checkout',
             'linkNewUPIAccount',
             [
-              JSON.stringify(options)
+              mobileNo, color
             ]
           );
         },

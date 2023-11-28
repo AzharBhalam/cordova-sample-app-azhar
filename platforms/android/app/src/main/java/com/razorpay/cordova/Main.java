@@ -50,19 +50,8 @@ public class Main extends CordovaPlugin implements PaymentResultWithDataListener
                     checkout.setKeyID(payload.getString("key"));
                     payload.remove("key");
                 }*/
-                //checkout.open(this.cordova.getActivity(), payload);
-                //checkout.setKeyID("rzp_test_0wFRWIZnH65uny");
-                checkout.upiTurbo.linkNewUpiAccount("9928815231", "#aabb11", new GenericPluginCallback() {
-                    @Override
-                    public void onSuccess(@NonNull Object data) {
-                        Log.d("DONNSB", "linkNewUpiAccount success");
-                    }
-
-                    @Override
-                    public void onError(@NonNull JSONObject jsonObject) {
-                        Log.d("DONNSB", "linkNewUpiAccount failure");
-                    }
-                });
+                JSONObject payload = new JSONObject(data.getString(0));
+                checkout.open(this.cordova.getActivity(), payload);
                 break;
             case "linkNewUPIAccount":
                 Log.d("DONNSB", "case link new upi account");
